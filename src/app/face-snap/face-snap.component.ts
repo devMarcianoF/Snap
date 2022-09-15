@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FaceSnap} from "../models/face-snap.model";
+import {FaceSnapsService} from "../services/face-snaps.service";
 
 @Component({
   selector: 'app-face-snap',
@@ -7,33 +8,26 @@ import {FaceSnap} from "../models/face-snap.model";
   styleUrls: ['./face-snap.component.scss']
 })
 export class FaceSnapComponent implements OnInit{
+//@Input()  crée comme un attribut HTML auquel on peut lier une valeur, tout comme vous l'avez fait avec l'attribut  src  de l'élément image !
+// (en plus de pouvoir utliser la propriété dans son parent (appcomponent dans notre cas)
+  @Input() faceSnap!: FaceSnap;
 
-  @Input() facesnap!: FaceSnap;
-
-  title!: string;
-  description!: string;
-  createdDate!: Date;
-  snaps!: number;
-  imageUrl!: string;
   buttonText!: string;
 
-  ngOnInit () {
-    this.title = "Archibald Haddock";
-    this.description = "My bff";
-    this.createdDate = new Date();
-    this.snaps = 65;
-    this.imageUrl = 'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg';
-    this.buttonText = "Oh Snap!";
+  constructor(private faceSnapsService: FaceSnapsService) { }
 
+
+  ngOnInit () {
+    this.buttonText = "Oh Snap!";
   }
 
   onSnap() {
     if ( this.buttonText === "Oh Snap!"){
-      this.facesnap.snaps++;
+      this.faceSnap.snaps++;
       this.buttonText = "Oops, un Snap!"
     }
     else {
-      this.facesnap.snaps--;
+      this.faceSnap.snaps--;
       this.buttonText = "Oh Snap!"
     }
 
