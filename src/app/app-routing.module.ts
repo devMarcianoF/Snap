@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {BrowserModule} from "@angular/platform-browser";
-import {FaceSnapListComponent} from "./face-snap-list/face-snap-list.component";
-import {LandingPageComponent} from "./landing-page/landing-page.component";
-import {SingleFaceSnapComponent} from "./single-face-snap/single-face-snap.component";
+import {LandingPageComponent} from "./landing-page/landing-page/landing-page.component";
 
 const routes: Routes = [
+  { path: 'facesnaps', loadChildren: () => import('./face-snaps/face-snaps.module').then(m => m.FaceSnapsModule) },
   {path: '', component: LandingPageComponent},
-  {path: 'faceSnaps', component: FaceSnapListComponent},
-  {path: 'faceSnaps/:id', component: SingleFaceSnapComponent}
 ];
 
 @NgModule({
@@ -17,4 +13,6 @@ const routes: Routes = [
     ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}
